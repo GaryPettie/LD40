@@ -5,7 +5,7 @@ using UnityEngine;
 public class MenuNavigation : MonoBehaviour {
 
 	public void Play () {
-		LevelManager.instance.LoadLevel(3);
+		LevelManager.instance.LoadMainGame();
 	}
 
 	public void NextLevel () {

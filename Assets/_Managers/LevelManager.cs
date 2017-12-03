@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
@@ -25,16 +26,48 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
+	public void LoadMainGame () {
+		Text loader = GameObject.Find("Loader").GetComponent<Text>();
+		StartCoroutine(LoadAsync(loader));
+	}
+
+	IEnumerator LoadAsync (Text loader) {
+		AsyncOperation operation = SceneManager.LoadSceneAsync(3);
+
+		while (!operation.isDone) {
+			if (loader != null) {
+				loader.text = loader.text + "*";
+			}
+			yield return null;
+		}
+	}
+
+
 	public void LoadNextLevel () {
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		if (SceneManager.GetActiveScene().buildIndex + 1 == 3) {
+			LoadMainGame();
+		}
+		else {
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		}
 	}
 
 	public void LoadPreviousLevel () {
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+		if (SceneManager.GetActiveScene().buildIndex - 1 == 3) {
+			LoadMainGame();
+		}
+		else {
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+		}
 	}
 
 	public void LoadLevel (int buildIndex) {
-		SceneManager.LoadScene(buildIndex);
+		if (buildIndex ==3) {
+			LoadMainGame();
+		}
+		else {
+			SceneManager.LoadScene(buildIndex);
+		}
 	}
 
 	public void QuitResuest () {

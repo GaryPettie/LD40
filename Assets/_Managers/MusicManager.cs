@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof (AudioSource))]
 public class MusicManager : MonoBehaviour {
@@ -20,21 +22,22 @@ public class MusicManager : MonoBehaviour {
 		}
 	}
 
-	void Start () {
-		//TODO Add volume control (from player prefs?)
-	}
-
 	void OnLevelWasLoaded (int buildIndex) {
 		AudioClip thisLevelMusic = levelMusic[buildIndex];
 
 		if (thisLevelMusic) {
 			audioSource.clip = thisLevelMusic;
 			audioSource.loop = true;
+			audioSource.volume = 0;
+			StartCoroutine(FadeIn());
 			audioSource.Play();
 		}
 	}
 
-	public void ChangeVolume (float volume) {
-		audioSource.volume = volume;
+	IEnumerator FadeIn() {
+		while (audioSource.volume < 1) {
+			audioSource.volume += 0.01f;
+			yield return null;
+		}
 	}
 }

@@ -45,7 +45,6 @@ public class Player : MonoBehaviour {
 
 	void Update () {
 		Move();
-		Debug.Log(currentHealth + " & " + isAlive);
 		if (currentHealth <= 0 && isAlive) {
 			Die();
 		}
