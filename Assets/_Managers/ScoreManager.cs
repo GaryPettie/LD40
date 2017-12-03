@@ -45,7 +45,6 @@ public class ScoreManager : MonoBehaviour {
 
 		if (score > highscore) {
 			PlayerPrefsManager.StoreHighScore(score);
-			Debug.Log("Score saved");
 		}
 
 		return score;

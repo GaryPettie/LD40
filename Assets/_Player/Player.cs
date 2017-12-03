@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-using UnityEngine.PostProcessing;
 
 
 public class Player : MonoBehaviour {

@@ -1,11 +1,10 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CoinScroll : MonoBehaviour {
 
 	[SerializeField] float scrollSpeed = 1f;
 	
-	void Update () {
+	void FixedUpdate () {
 		transform.Translate(new Vector3(0, -scrollSpeed * Time.deltaTime, 0));
 	}
 

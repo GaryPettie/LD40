@@ -7,10 +7,6 @@ public class CoinController : MonoBehaviour {
 	int rand;
 	int lastChunk = 5;
 
-	void Update () {
-		
-	}
-
 	public void LoadNextChunk () {
 		if (Time.timeSinceLevelLoad < 45) {
 			if (lastChunk == 0) {
