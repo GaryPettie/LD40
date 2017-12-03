@@ -7144,7 +7144,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1659620908}
-        m_MethodName: PlayAgain
+        m_MethodName: PreviousLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7542,12 +7542,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1659620903}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d293501c5b1bed408edf615b2ce28e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1da7ca616af2cd74fa66d73999bb887c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 809180485}
-  timeText: {fileID: 0}
-  coinsText: {fileID: 0}
 --- !u!114 &1659620909
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IntroScreen : MonoBehaviour {
+public class MenuNavigation : MonoBehaviour {
 
 	public void Play () {
 		LevelManager.instance.LoadLevel(3);
 	}
 
-	public void Instructions () {
+	public void NextLevel () {
 		LevelManager.instance.LoadNextLevel();
+	}
+
+	public void PreviousLevel () {
+		LevelManager.instance.LoadPreviousLevel();
 	}
 }

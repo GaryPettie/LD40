@@ -18,9 +18,13 @@ public class Player : MonoBehaviour {
 	[SerializeField] float currentHealth = 100;
 	[SerializeField] float baseSpeed = 10f;
 
+	[SerializeField] ParticleSystem engine;
+	[SerializeField] ParticleSystem penalty1;
+	[SerializeField] ParticleSystem penalty2;
+
 	MeshRenderer mesh;
-	ParticleSystem engine;
 	ParticleSystem.EmissionModule emission;
+	AudioSource audio;
 	
 	float translation;
 	int outcome;
@@ -29,16 +33,19 @@ public class Player : MonoBehaviour {
 	void Awake () {
 		counters = new int[powerUpCount];
 		currentHealth = maxHealth;
+		audio = GetComponent<AudioSource>();
 	}
 
 	void Start () {
 		mesh = GetComponentInChildren<MeshRenderer>();
 		engine = GetComponentInChildren<ParticleSystem>();
 		emission = engine.emission;
+		isAlive = true;
 	}
 
 	void Update () {
 		Move();
+		Debug.Log(currentHealth + " & " + isAlive);
 		if (currentHealth <= 0 && isAlive) {
 			Die();
 		}
@@ -59,9 +66,18 @@ public class Player : MonoBehaviour {
 
 	void Die () {
 		isAlive = false;
-		Destroy(gameObject);
+
+		if (audio.isPlaying) {
+			audio.Stop();
+		}
+		audio.Play();
+
+		penalty1.Play();
+		penalty2.Play();
+
+		Destroy(gameObject,2f);
 		ScoreManager.instance.SubmitTime();
-		LevelManager.instance.LoadNextLevel();
+		LevelManager.instance.LoadNextLevel();		
 	}
 
 	void SelectOutcome () {
@@ -75,6 +91,14 @@ public class Player : MonoBehaviour {
 	}
 
 	void PerformOutcome (int outcome) {
+		if (audio.isPlaying) {
+			audio.Stop();
+		}
+		audio.Play();
+
+		penalty1.Play();
+		penalty2.Play();
+
 		switch (outcome) {
 			//Damage Ship
 			case 0:
@@ -104,7 +128,7 @@ public class Player : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.tag == "Coin") {
-			AudioSource.PlayClipAtPoint(other.GetComponent<AudioSource>().clip, other.transform.position);
+			AudioSource.PlayClipAtPoint(other.GetComponent<AudioSource>().clip, other.transform.position, 1.5f);
 			Destroy(other.gameObject);
 			ScoreManager.instance.AddCoin();
 			SelectOutcome();

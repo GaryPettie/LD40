@@ -16,7 +16,7 @@ public class Shredder : MonoBehaviour {
 			other.gameObject.SetActive(false);
 			//TODO Need a better way to destroy the coin block.
 			//Currently offset by 1 sec to allow time for new block to be created before the current one gets destroyed (cuts down a little bit of lag).
-			Destroy(other.gameObject, 1f);
+			//Destroy(other.gameObject);
 			controller.LoadNextChunk();
 		}
 	}
